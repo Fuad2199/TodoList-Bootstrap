@@ -1,0 +1,42 @@
+.todo-list-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: lightgreen;
+}
+
+.todo-list-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.todo-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-list-container li {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.todo-list-container .completed {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.todo-list-container .btn {
+  border-radius: 0.25rem;
+}
+.todo-list-container {
+  margin-top: 20px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.custom-label {
+  display: block !important;
+}
+
