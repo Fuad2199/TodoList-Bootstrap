@@ -7,7 +7,7 @@ import { FaTrash, FaEdit, FaPlus, FaSave } from 'react-icons/fa';
 import './TodoList.css';
 
 function TodoList() {
-  const [todos, setTodos] = useState([]);  //todoları listdə tutmaq üçün vəziyyət idarəedici
+  const [todos, setTodos] = useState([]);  // todoları listdə tutmaq üçün vəziyyət idarəedici
   const [inputValue, setInputValue] = useState('');
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -29,7 +29,7 @@ function TodoList() {
       alert('Zəhmət olmasa tapşırığı daxil edin.');
     }
   };
-console.log(addTodo);
+
   const deleteTodo = (indexToDelete) => {
     const newTodos = todos.filter((_, index) => index !== indexToDelete);
     setTodos(newTodos);
@@ -72,31 +72,20 @@ console.log(addTodo);
       </Form.Group>
       <ListGroup>
         {todos.map((todo, index) => (
-          <ListGroup.Item 
-            key={index} 
-            className={`d-flex justify-content-between align-items-center ${todo.completed ? 'completed' : ''}`}
-          >
-            <div className="d-flex align-items-center">
-              <Form.Check 
-                type="checkbox" 
-                checked={todo.completed} 
-                onChange={() => toggleComplete(index)}
-                className="me-2"
-              />
-              <div className="custom-label">{`${index + 1}. ${todo.text}`}</div>
-            </div>
-            {editIndex === index ? (
-              <>
-                <Form.Control 
-                  type="text" 
-                  value={editValue} 
-                  onChange={(e) => setEditValue(e.target.value)} 
+          editIndex !== index && (  // Edit modunda deyilsə todo-nu göstər
+            <ListGroup.Item 
+              key={index} 
+              className={`d-flex justify-content-between align-items-center ${todo.completed ? 'completed' : ''}`}
+            >
+              <div className="d-flex align-items-center">
+                <Form.Check 
+                  type="checkbox" 
+                  checked={todo.completed} 
+                  onChange={() => toggleComplete(index)}
+                  className="me-2"
                 />
-                <Button onClick={saveTodo} variant="primary" className="ms-2">
-                  <FaSave />
-                </Button>
-              </>
-            ) : (
+                <div className="custom-label">{`${index + 1}. ${todo.text}`}</div>
+              </div>
               <div className="ms-auto">
                 <Button onClick={() => editTodo(index)} variant="warning" className="me-2">
                   <FaEdit />
@@ -105,10 +94,23 @@ console.log(addTodo);
                   <FaTrash />
                 </Button>
               </div>
-            )}
-          </ListGroup.Item>
+            </ListGroup.Item>
+          )
         ))}
       </ListGroup>
+      {editIndex !== null && (
+        <div className="edit-section">
+          <Form.Control 
+            type="text" 
+            value={editValue} 
+            onChange={(e) => setEditValue(e.target.value)} 
+            className="mt-3"
+          />
+          <Button onClick={saveTodo} variant="primary" className="mt-2">
+            <FaSave /> Save
+          </Button>
+        </div>
+      )}
     </Container>
   );
 }
